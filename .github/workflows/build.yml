@@ -1,10 +1,10 @@
-name: Build Geode Mod
+name: Build Android
 
 on:
   push:
     branches:
       - main
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,10 +14,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Geode Mod
-        uses: geode-sdk/build-geode-mod@main
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
-      - name: Upload Mod
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Geode CLI
+        run: |
+          pip install git+https://github.com/geode-sdk/cli
+
+      - name: Install Geode SDK
+        run: |
+          geode sdk install
+
+      - name: Build Mod
+        run: |
+          geode build -p android
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: AI-Level-Generator-Pro
