@@ -12,27 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
       - name: Install Geode CLI
         run: |
           curl -fsSL https://cli.geode-sdk.org/install.sh | bash
 
-      - name: Setup Android NDK
+      - name: Build
         run: |
-          wget https://dl.google.com/android/repository/android-ndk-r27-linux.zip
-          unzip android-ndk-r27-linux.zip
-
-      - name: Build Mod
-        run: |
-          ~/.local/bin/geode build -p android
-
-      - name: Upload Mod
-        uses: actions/upload-artifact@v4
-        with:
-          name: AI-Level-Generator-Pro
-          path: build/**/*.geode
+          geode build android
