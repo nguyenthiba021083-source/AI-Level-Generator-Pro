@@ -9,6 +9,7 @@ add_library(${PROJECT_NAME} SHARED
     src/EditorUIHook.cpp
     src/AIMenu.cpp
     src/AISystem.cpp
+    src/EditorLayerBridge.cpp
 )
 
 setup_geode_mod(${PROJECT_NAME})
