@@ -6,7 +6,17 @@ using namespace geode::prelude;
 AIMenu* AIMenu::create() {
     auto ret = new AIMenu();
 
-    if (ret && ret->init()) {
+    if (ret && ret->init(m_input = TextInput::create(
+    220.f,
+    "Enter AI Prompt"
+);
+
+m_input->setPosition(
+    winSize.width / 2,
+    winSize.height / 2 + 20
+);
+
+addChild(m_input);)) {
         ret->autorelease();
         return ret;
     }
