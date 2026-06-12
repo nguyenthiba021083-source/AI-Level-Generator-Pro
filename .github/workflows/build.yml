@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
@@ -13,13 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Geode Mod
-        uses: geode-sdk/build-geode-mod@main
+      - uses: geode-sdk/build-geode-mod@v2
         with:
           target: android32
 
-      - name: Upload Build
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: AI-Level-Generator-Pro
+          name: geode-build
           path: build/**/*.geode
