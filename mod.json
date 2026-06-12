@@ -1,5 +1,5 @@
 {
-    "geode": "3.7.4",
+    "geode": ">=3.7.0",
     "version": "1.0.0",
     "id": "nguyenthiba.ai-level-generator-pro",
     "name": "AI Level Generator Pro",
