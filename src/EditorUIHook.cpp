@@ -39,13 +39,5 @@ public:
     }
 
     void onAIButton(CCObject*) {
-        auto scene = CCScene::create();
-
-        scene->addChild(
-            AIMenu::create()
-        );
-
-        CCDirector::sharedDirector()
-            ->pushScene(scene);
+    AIMenu::create()->show();
     }
-};
