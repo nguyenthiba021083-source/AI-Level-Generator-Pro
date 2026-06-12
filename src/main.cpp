@@ -2,6 +2,6 @@
 
 using namespace geode::prelude;
 
-$on_mod(Loaded) {
-    log::info("AI Level Generator PRO loaded!");
+$execute {
+    log::info("AI Level Generator Pro Loaded");
 }
