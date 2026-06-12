@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include "AIMenu.hpp"
-
+#include "AISystem.hpp"
 using namespace geode::prelude;
 
 AIMenu* AIMenu::create() {
@@ -111,4 +111,16 @@ void AIMenu::onGenerate(CCObject* sender) {
 
 void AIMenu::onClose(CCObject* sender) {
     CCDirector::sharedDirector()->popScene();
+void AIMenu::onGenerate(CCObject*) {
+
+    auto prompt =
+        m_input->getString();
+
+    AISystem::generate(prompt);
+
+    FLAlertLayer::create(
+        "AI",
+        "Prompt executed.",
+        "OK"
+    )->show();
 }
