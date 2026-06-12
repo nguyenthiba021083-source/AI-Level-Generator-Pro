@@ -1,42 +1,40 @@
-#include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
+#include "AIMenu.hpp"
 
 using namespace geode::prelude;
 
-class $modify(AIEditorUI, EditorUI) {
+class $modify(EditorUIHook, EditorUI) {
+
     bool init(LevelEditorLayer* editorLayer) {
         if (!EditorUI::init(editorLayer))
             return false;
 
-        auto winSize = CCDirector::sharedDirector()->getWinSize();
-
         auto sprite =
-            CCSprite::createWithSpriteFrameName("GJ_plusBtn_001.png");
+            CCSprite::createWithSpriteFrameName(
+                "GJ_plusBtn_001.png"
+            );
 
-        auto btn = CCMenuItemSpriteExtra::create(
-            sprite,
-            this,
-            menu_selector(AIEditorUI::onAIButton)
-        );
+        auto btn =
+            CCMenuItemSpriteExtra::create(
+                sprite,
+                this,
+                menu_selector(EditorUIHook::onAIButton)
+            );
 
-        auto menu = CCMenu::create();
-        menu->addChild(btn);
+        btn->setPosition({-160.f, 90.f});
 
-        menu->setPosition(
-            winSize.width - 50.f,
-            winSize.height - 100.f
-        );
-
-        this->addChild(menu);
+        if (m_buttonMenu)
+            m_buttonMenu->addChild(btn);
 
         return true;
     }
 
     void onAIButton(CCObject*) {
-        FLAlertLayer::create(
-            "AI Level Generator",
-            "AI Button Working!",
-            "OK"
-        )->show();
+
+        auto scene = CCScene::create();
+
+        scene->addChild(AIMenu::create());
+
+        CCDirector::sharedDirector()->pushScene(scene);
     }
 };
