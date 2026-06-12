@@ -66,3 +66,44 @@ bool AIMenu::setup() {
     auto closeBtn =
         CCMenuItemSpriteExtra::create(
             closeLabel,
+            this,
+            menu_selector(AIMenu::onClose)
+        );
+
+    closeBtn->setPosition(
+        ccp(
+            m_size.width / 2,
+            m_size.height / 2 - 60.f
+        )
+    );
+
+    m_buttonMenu->addChild(closeBtn);
+
+    return true;
+}
+
+void AIMenu::onGenerate(CCObject*) {
+    std::string prompt = m_input->getString();
+
+    if (prompt.empty()) {
+        FLAlertLayer::create(
+            "AI",
+            "Please enter a prompt.",
+            "OK"
+        )->show();
+
+        return;
+    }
+
+    AISystem::generate(prompt);
+
+    FLAlertLayer::create(
+        "AI",
+        "Prompt executed.",
+        "OK"
+    )->show();
+}
+
+void AIMenu::onClose(CCObject*) {
+    Popup<>::onClose(nullptr);
+}
