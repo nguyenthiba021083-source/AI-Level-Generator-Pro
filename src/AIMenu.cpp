@@ -60,3 +60,45 @@ bool AIMenu::init() {
     auto closeLabel =
         CCLabelBMFont::create(
             "Close",
+            "goldFont.fnt"
+        );
+
+    auto closeBtn =
+        CCMenuItemLabel::create(
+            closeLabel,
+            this,
+            menu_selector(AIMenu::onClose)
+        );
+
+    auto menu = CCMenu::create();
+
+    menu->addChild(generateBtn);
+    menu->addChild(closeBtn);
+
+    generateBtn->setPosition(
+        ccp(0, 20)
+    );
+
+    closeBtn->setPosition(
+        ccp(0, -20)
+    );
+
+    menu->setPosition(
+        ccp(
+            winSize.width / 2,
+            winSize.height / 2
+        )
+    );
+
+    this->addChild(menu);
+
+    return true;
+}
+
+void AIMenu::onGenerate(CCObject* sender) {
+    log::info("Generate button clicked!");
+}
+
+void AIMenu::onClose(CCObject* sender) {
+    CCDirector::sharedDirector()->popScene();
+}
