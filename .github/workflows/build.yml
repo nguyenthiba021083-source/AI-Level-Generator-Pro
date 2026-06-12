@@ -12,7 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Show files
+      - name: Install Geode CLI
         run: |
-          pwd
-          ls -R
+          curl -fsSL https://raw.githubusercontent.com/geode-sdk/cli/main/install.sh | bash
+
+      - name: Verify Geode
+        run: geode --version
+
+      - name: Build
+        run: geode build -p android
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AI-Level-Generator-Pro
+          path: build/**/*.geode
