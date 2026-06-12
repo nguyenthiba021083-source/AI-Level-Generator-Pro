@@ -17,13 +17,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Geode CLI
-        run: |
-          pip install geode-cli
-
-      - name: Verify Geode
-        run: |
-          python -m geode --version
+      
 
       - name: Build
         run: |
