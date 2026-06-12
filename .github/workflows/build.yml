@@ -11,31 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Geode CLI
-        run: |
-          pip install geode-cli
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Setup NDK
+      - name: Install NDK
         run: |
           sdkmanager "ndk;27.0.12077973"
 
-      - name: Configure Geode
+      - name: Configure CMake
         run: |
-          geode config set sdk.path $ANDROID_HOME
-          geode config set ndk.path $ANDROID_HOME/ndk/27.0.12077973
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release
 
-      - name: Build Mod
+      - name: Build
         run: |
-          geode build -p android
+          cmake --build build -j4
 
-      - name: Upload Build
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Android-Build
-          path: build/**/*.geode
+          name: AndroidBuild
+          path: build/
