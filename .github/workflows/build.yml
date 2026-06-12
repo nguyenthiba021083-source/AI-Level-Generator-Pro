@@ -12,15 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Geode CLI
+      - name: Show files
         run: |
-          curl -fsSL https://cli.geode-sdk.org/install.sh | bash
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Verify Geode
-        run: |
-          geode --version
-
-      - name: Build
-        run: |
-          geode build android
+          pwd
+          ls -R
