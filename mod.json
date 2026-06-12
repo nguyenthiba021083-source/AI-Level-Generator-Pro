@@ -1,9 +1,9 @@
 {
-    
-    "geode": ">=3.7.0",
+    "geode": ">=4.0.0",
+
     "gd": {
         "android": "2.2074"
-    }
+    },
 
     "version": "1.0.0",
     "id": "nguyenthiba.ai-level-generator-pro",
