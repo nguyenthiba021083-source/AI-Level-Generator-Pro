@@ -4,9 +4,11 @@ project(AILevelGeneratorPro)
 
 find_package(Geode REQUIRED)
 
-add_geode_mod(
-    ${PROJECT_NAME}
-
+add_library(${PROJECT_NAME} SHARED
     src/main.cpp
     src/EditorUIHook.cpp
+    src/AIMenu.cpp
+    src/AISystem.cpp
 )
+
+setup_geode_mod(${PROJECT_NAME})
