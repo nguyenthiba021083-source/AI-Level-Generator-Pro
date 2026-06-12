@@ -12,15 +12,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
       - name: Install Geode CLI
         run: |
-          curl -fsSL https://raw.githubusercontent.com/geode-sdk/cli/main/install.sh | bash
+          pip install geode-cli
 
       - name: Verify Geode
-        run: geode --version
+        run: |
+          python -m geode --version
 
       - name: Build
-        run: geode build -p android
+        run: |
+          python -m geode build -p android
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
