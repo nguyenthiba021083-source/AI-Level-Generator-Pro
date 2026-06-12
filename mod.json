@@ -1,5 +1,10 @@
 {
+    
     "geode": ">=3.7.0",
+    "gd": {
+        "android": "2.2074"
+    }
+
     "version": "1.0.0",
     "id": "nguyenthiba.ai-level-generator-pro",
     "name": "AI Level Generator Pro",
