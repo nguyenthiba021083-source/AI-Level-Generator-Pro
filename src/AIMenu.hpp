@@ -5,11 +5,14 @@
 using namespace geode::prelude;
 
 class AIMenu : public CCLayer {
+protected:
+    TextInput* m_input;
+
 public:
     static AIMenu* create();
 
     bool init() override;
 
-    void onGenerate(CCObject* sender);
-    void onClose(CCObject* sender);
+    void onGenerate(CCObject*);
+    void onClose(CCObject*);
 };
