@@ -1,9 +1,18 @@
 #include "AISystem.hpp"
+#include "EditorLayerBridge.hpp"
+
 #include <Geode/Geode.hpp>
 
 using namespace geode::prelude;
 
 void AISystem::generate(std::string prompt) {
+    auto editor = EditorLayerBridge::editor;
+
+    if (!editor) {
+        log::error("LevelEditorLayer not found!");
+        return;
+    }
+
     if (prompt == "spike") {
         log::info("Generate 1 spike");
     }
@@ -15,6 +24,9 @@ void AISystem::generate(std::string prompt) {
     }
     else if (prompt == "portal") {
         log::info("Generate portal");
+    }
+    else if (prompt == "wave") {
+        log::info("Generate wave");
     }
     else {
         log::info("Unknown command: {}", prompt);
