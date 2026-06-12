@@ -1,5 +1,5 @@
 {
-    "geode": ">=3.7.4"
+    "geode": ">=3.7.4",
 
     "gd": {
         "android": "2.2074"
@@ -9,5 +9,10 @@
     "id": "nguyenthiba.ai-level-generator-pro",
     "name": "AI Level Generator Pro",
     "developer": "nguyenthiba",
-    "description": "Advanced AI-powered Geometry Dash Level Generator"
+
+    "description": "Advanced AI-powered Geometry Dash Level Generator",
+
+    "links": {
+        "source": "https://github.com/nguyenthiba021083-source/AI-Level-Generator-Pro"
+    }
 }
