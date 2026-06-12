@@ -40,12 +40,7 @@ public:
     }
 
     void onAIButton(CCObject*) {
+    log::info("Opening AI Menu");
     AIMenu::create()->show();
-    }
-        }
-
-        log::info("Opening AI Menu");
-
-        AIMenu::create()->show();
-    }
+}
 };
