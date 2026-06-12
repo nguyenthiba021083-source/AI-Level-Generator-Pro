@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
-#include <Geode/binding/LevelEditorLayer.hpp>
+#include <Geode/ui/GeodeUI.hpp>
 
 #include "AIMenu.hpp"
 #include "EditorLayerBridge.hpp"
@@ -13,16 +13,13 @@ public:
         if (!EditorUI::init(editorLayer))
             return false;
 
-        // Save editor pointer for AI system
+        // Save editor for AI system
         EditorLayerBridge::editor = editorLayer;
 
         auto sprite =
             CCSprite::createWithSpriteFrameName(
                 "GJ_plusBtn_001.png"
             );
-
-        if (!sprite)
-            return true;
 
         auto btn =
             CCMenuItemSpriteExtra::create(
@@ -31,7 +28,6 @@ public:
                 menu_selector(EditorUIHook::onAIButton)
             );
 
-        btn->setScale(0.8f);
         btn->setPosition(ccp(-160.f, 90.f));
 
         if (m_buttonMenu)
@@ -43,14 +39,13 @@ public:
     }
 
     void onAIButton(CCObject*) {
-        auto popup = AIMenu::create();
+        auto scene = CCScene::create();
 
-        if (popup) {
-            CCDirector::sharedDirector()
-                ->getRunningScene()
-                ->addChild(popup, 9999);
+        scene->addChild(
+            AIMenu::create()
+        );
 
-            log::info("AI Menu Opened");
-        }
+        CCDirector::sharedDirector()
+            ->pushScene(scene);
     }
 };
