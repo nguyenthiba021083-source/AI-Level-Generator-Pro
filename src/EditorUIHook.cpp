@@ -40,9 +40,8 @@ public:
     }
 
     void onAIButton(CCObject*) {
-        if (!EditorLayerBridge::hasEditor()) {
-            log::error("Editor not available");
-            return;
+    AIMenu::create()->show();
+    }
         }
 
         log::info("Opening AI Menu");
