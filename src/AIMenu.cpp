@@ -1,22 +1,12 @@
-#include <Geode/Geode.hpp>
 #include "AIMenu.hpp"
 #include "AISystem.hpp"
+
 using namespace geode::prelude;
 
 AIMenu* AIMenu::create() {
     auto ret = new AIMenu();
 
-    if (ret && ret->init(m_input = TextInput::create(
-    220.f,
-    "Enter AI Prompt"
-);
-
-m_input->setPosition(
-    winSize.width / 2,
-    winSize.height / 2 + 20
-);
-
-addChild(m_input);)) {
+    if (ret && ret->init()) {
         ret->autorelease();
         return ret;
     }
@@ -29,30 +19,33 @@ bool AIMenu::init() {
     if (!CCLayer::init())
         return false;
 
-    auto winSize =
-        CCDirector::sharedDirector()->getWinSize();
+    auto winSize = CCDirector::sharedDirector()->getWinSize();
 
-    // Background
-    auto bg = CCLayerColor::create(
-        ccc4(0, 0, 0, 180)
-    );
+    auto bg = CCLayerColor::create(ccc4(0, 0, 0, 180));
     this->addChild(bg);
 
-    // Title
-    auto title =
-        CCLabelBMFont::create(
-            "AI Level Generator PRO",
-            "bigFont.fnt"
-        );
+    auto title = CCLabelBMFont::create(
+        "AI Level Generator PRO",
+        "bigFont.fnt"
+    );
 
     title->setPosition(
-        winSize.width / 2,
-        winSize.height / 2 + 80
+        ccp(winSize.width / 2, winSize.height / 2 + 100)
     );
 
     this->addChild(title);
 
-    // Generate Button
+    m_input = TextInput::create(
+        220.f,
+        "Enter AI Prompt"
+    );
+
+    m_input->setPosition(
+        ccp(winSize.width / 2, winSize.height / 2 + 40)
+    );
+
+    this->addChild(m_input);
+
     auto generateLabel =
         CCLabelBMFont::create(
             "Generate",
@@ -66,7 +59,6 @@ bool AIMenu::init() {
             menu_selector(AIMenu::onGenerate)
         );
 
-    // Close Button
     auto closeLabel =
         CCLabelBMFont::create(
             "Close",
@@ -85,18 +77,13 @@ bool AIMenu::init() {
     menu->addChild(generateBtn);
     menu->addChild(closeBtn);
 
-    generateBtn->setPosition(
-        ccp(0, 20)
-    );
-
-    closeBtn->setPosition(
-        ccp(0, -20)
-    );
+    generateBtn->setPosition(ccp(0, 20));
+    closeBtn->setPosition(ccp(0, -20));
 
     menu->setPosition(
         ccp(
             winSize.width / 2,
-            winSize.height / 2
+            winSize.height / 2 - 40
         )
     );
 
@@ -105,16 +92,8 @@ bool AIMenu::init() {
     return true;
 }
 
-void AIMenu::onGenerate(CCObject* sender) {
-    log::info("Generate button clicked!");
-}
-
-void AIMenu::onClose(CCObject* sender) {
-    CCDirector::sharedDirector()->popScene();
 void AIMenu::onGenerate(CCObject*) {
-
-    auto prompt =
-        m_input->getString();
+    std::string prompt = m_input->getString();
 
     AISystem::generate(prompt);
 
@@ -123,4 +102,8 @@ void AIMenu::onGenerate(CCObject*) {
         "Prompt executed.",
         "OK"
     )->show();
+}
+
+void AIMenu::onClose(CCObject*) {
+    CCDirector::sharedDirector()->popScene();
 }
