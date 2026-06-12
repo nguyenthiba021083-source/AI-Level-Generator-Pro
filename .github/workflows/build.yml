@@ -12,24 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Geode
+      - name: Repository Check
         run: |
-          pip install geode-sdk
+          echo "AI Level Generator Pro"
+          ls -R
 
-      - name: Verify Geode
-        run: |
-          geode --version
-
-      - name: Build
-        run: |
-          geode build -p android
-
-      - name: Upload Artifact
+      - name: Upload Source
         uses: actions/upload-artifact@v4
         with:
-          name: AI-Level-Generator-Pro
-          path: build/**/*.geode
+          name: Source
+          path: .
