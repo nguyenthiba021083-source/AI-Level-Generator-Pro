@@ -4,15 +4,13 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -20,27 +18,20 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Install Geode CLI
         run: |
-          pip install git+https://github.com/geode-sdk/cli
+          curl -fsSL https://cli.geode-sdk.org/install.sh | bash
 
-      - name: Install Geode SDK
+      - name: Setup Android NDK
         run: |
-          geode sdk install
+          wget https://dl.google.com/android/repository/android-ndk-r27-linux.zip
+          unzip android-ndk-r27-linux.zip
 
       - name: Build Mod
         run: |
-          geode build -p android
+          ~/.local/bin/geode build -p android
 
-      - name: Upload Artifact
+      - name: Upload Mod
         uses: actions/upload-artifact@v4
         with:
           name: AI-Level-Generator-Pro
