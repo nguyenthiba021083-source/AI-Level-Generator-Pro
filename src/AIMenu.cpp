@@ -22,13 +22,13 @@ bool AIMenu::init() {
     auto winSize =
         CCDirector::sharedDirector()->getWinSize();
 
-    // Background tối
+    // Background
     auto bg = CCLayerColor::create(
         ccc4(0, 0, 0, 180)
     );
     this->addChild(bg);
 
-    // Tiêu đề
+    // Title
     auto title =
         CCLabelBMFont::create(
             "AI Level Generator PRO",
@@ -60,22 +60,3 @@ bool AIMenu::init() {
     auto closeLabel =
         CCLabelBMFont::create(
             "Close",
-            "goldFont.fnt"
-        );
-
-    auto closeBtn =
-        CCMenuItemLabel::create(
-            closeLabel,
-            this,
-            menu_selector(AIMenu::onClose)
-   void AIMenu::onGenerate(CCObject* sender) {
-    FLAlertLayer::create(
-        "AI Generator",
-        "Generate button clicked!",
-        "OK"
-    )->show();
-}
-
-void AIMenu::onClose(CCObject* sender) {
-    CCDirector::sharedDirector()->popScene();
-}
