@@ -39,21 +39,19 @@ void AISystem::generate(std::string prompt) {
     }
 
     if (cmd == "spike" || cmd == "1 spike") {
-        log::info("Generate 1 spike");
+    log::info("Generate 1 spike");
 
-        // TODO:
-        // place spike object here
+    auto obj = editor->createObject(
+        8,
+        cocos2d::CCPoint(0.f, 0.f),
+        false
+    );
+
+    if (obj) {
+        editor->addObject(obj);
+        log::info("Spike placed");
     }
-
-    else if (
-        cmd == "10 spikes" ||
-        cmd == "ten spikes"
-    ) {
-        log::info("Generate 10 spikes");
-
-        // TODO:
-        // place 10 spikes here
-    }
+}
 
     else if (
         cmd == "cube" ||
