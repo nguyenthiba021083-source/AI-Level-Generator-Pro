@@ -1,4 +1,9 @@
-#include <Geode/Geode.hpp>
+#include <Geode/modify/EditorUI.hpp>
+#include <Geode/ui/GeodeUI.hpp>
+
+#include "AIMenu.hpp"
+
+using namespace geode::prelude;#include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
 
 #include "AIMenu.hpp"
