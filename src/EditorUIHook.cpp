@@ -1,3 +1,4 @@
+#include "AIMenu.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
 #include <Geode/ui/GeodeUI.hpp>
