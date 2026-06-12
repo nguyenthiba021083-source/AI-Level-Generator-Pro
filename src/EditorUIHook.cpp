@@ -1,8 +1,10 @@
+#include "AIMenu.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 
 #include "AIMenu.hpp"
+#include "EditorLayerBridge.hpp"
 
 using namespace geode::prelude;
 
@@ -11,6 +13,9 @@ public:
     bool init(LevelEditorLayer* editorLayer) {
         if (!EditorUI::init(editorLayer))
             return false;
+
+        // Save editor for AI system
+        EditorLayerBridge::editor = editorLayer;
 
         auto sprite =
             CCSprite::createWithSpriteFrameName(
@@ -26,20 +31,17 @@ public:
 
         btn->setPosition(ccp(-160.f, 90.f));
 
-        if (m_buttonMenu)
+        if (m_buttonMenu) {
             m_buttonMenu->addChild(btn);
+        }
+
+        log::info("AI Button Added");
 
         return true;
     }
 
     void onAIButton(CCObject*) {
-        auto scene = CCScene::create();
-
-        scene->addChild(
-            AIMenu::create()
-        );
-
-        CCDirector::sharedDirector()
-            ->pushScene(scene);
-    }
+    log::info("Opening AI Menu");
+    AIMenu::create()->show();
+}
 };

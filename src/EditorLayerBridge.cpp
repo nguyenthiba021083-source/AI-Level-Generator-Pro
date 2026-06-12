@@ -1,3 +1,3 @@
 #include "EditorLayerBridge.hpp"
 
-LevelEditorLayer* g_editorLayer = nullptr;
+LevelEditorLayer* EditorLayerBridge::editor = nullptr;
