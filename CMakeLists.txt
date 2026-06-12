@@ -8,4 +8,5 @@ add_geode_mod(
     ${PROJECT_NAME}
 
     src/main.cpp
+    src/EditorUIHook.cpp
 )
