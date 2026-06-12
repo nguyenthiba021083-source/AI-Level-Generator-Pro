@@ -1,12 +1,13 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
+#include <Geode/ui/TextInput.hpp>
 
 using namespace geode::prelude;
 
 class AIMenu : public CCLayer {
 protected:
-    TextInput* m_input;
+    TextInput* m_input = nullptr;
 
 public:
     static AIMenu* create();
