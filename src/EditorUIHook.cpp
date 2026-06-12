@@ -30,8 +30,9 @@ public:
 
         btn->setPosition(ccp(-160.f, 90.f));
 
-        if (m_buttonMenu)
+        if (m_buttonMenu) {
             m_buttonMenu->addChild(btn);
+        }
 
         log::info("AI Button Added");
 
@@ -39,5 +40,13 @@ public:
     }
 
     void onAIButton(CCObject*) {
-    AIMenu::create()->show();
+        if (!EditorLayerBridge::hasEditor()) {
+            log::error("Editor not available");
+            return;
+        }
+
+        log::info("Opening AI Menu");
+
+        AIMenu::create()->show();
     }
+};
