@@ -1,4 +1,6 @@
+#include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
+
 #include "AIMenu.hpp"
 
 using namespace geode::prelude;
@@ -21,7 +23,9 @@ class $modify(EditorUIHook, EditorUI) {
                 menu_selector(EditorUIHook::onAIButton)
             );
 
-        btn->setPosition({-160.f, 90.f});
+        btn->setPosition(
+            ccp(-160.f, 90.f)
+        );
 
         if (m_buttonMenu)
             m_buttonMenu->addChild(btn);
@@ -33,8 +37,11 @@ class $modify(EditorUIHook, EditorUI) {
 
         auto scene = CCScene::create();
 
-        scene->addChild(AIMenu::create());
+        scene->addChild(
+            AIMenu::create()
+        );
 
-        CCDirector::sharedDirector()->pushScene(scene);
+        CCDirector::sharedDirector()
+            ->pushScene(scene);
     }
 };
