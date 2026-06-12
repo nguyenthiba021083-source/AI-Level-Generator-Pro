@@ -1,35 +1,41 @@
-name: Build Geode Mod
+name: Build Android
 
 on:
-push:
-branches:
-- main
-
-pull_request:
-branches:
-- main
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
-build:
-runs-on: windows-latest
+  build-android:
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: Setup CMake
-    uses: lukka/get-cmake@latest
+      - name: Setup Geode CLI
+        run: |
+          pip install geode-cli
 
-  - name: Configure
-    run: |
-      cmake -B build
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-  - name: Build
-    run: |
-      cmake --build build --config Release
+      - name: Setup NDK
+        run: |
+          sdkmanager "ndk;27.0.12077973"
 
-  - name: Upload Build Artifacts
-    uses: actions/upload-artifact@v4
-    with:
-      name: AI-Level-Generator-Pro
-      path: build
+      - name: Configure Geode
+        run: |
+          geode config set sdk.path $ANDROID_HOME
+          geode config set ndk.path $ANDROID_HOME/ndk/27.0.12077973
+
+      - name: Build Mod
+        run: |
+          geode build -p android
+
+      - name: Upload Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Android-Build
+          path: build/**/*.geode
