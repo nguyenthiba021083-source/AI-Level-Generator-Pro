@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   pull_request:
     branches:
       - main
@@ -17,12 +16,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # test rebuild
-
       - name: Build Geode Mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          target: android32
+          platform: android32
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
