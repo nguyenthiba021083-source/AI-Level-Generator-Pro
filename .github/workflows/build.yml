@@ -1,10 +1,9 @@
-name: Build
+name: Build Android
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
   build:
@@ -13,13 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Geode Mod
-        uses: geode-sdk/build-geode-mod@main
+      - uses: geode-sdk/build-geode-mod@main
         with:
-          target: android32
+          platform: android32
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: geode-build
           path: build/**/*.geode
